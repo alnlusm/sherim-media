@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"C:/Users/Akbota/Downloads/IMG_7543 \\(1\\).mp4\" \"C:/Users/Akbota/OneDrive/Рабочий стол/sherim-v4-2.0 — копия/assets/hero-bg.mp4\")",
+      "Bash(cd \"C:/Users/Akbota/OneDrive/Рабочий стол/sherim-v4-2.0 — копия\" && mkdir -p .claude)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.instagram.com)",
+      "WebSearch",
+      "WebFetch(domain:2gis.kz)"
+    ]
+  }
+}
