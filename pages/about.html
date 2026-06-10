@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>О нас · sherim media</title>
+<meta name="description" content="sherim media — медиакомпания из Алматы. Более 5 лет и 1000+ проектов." />
+<link rel="stylesheet" href="../assets/style.css" />
+<link rel="stylesheet" href="../assets/service.css" />
+<style>
+  .about-text-block {
+    padding: 80px 40px 120px;
+    border-bottom: 1px solid var(--line);
+  }
+  .about-main {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 144;
+    max-width: 1200px;
+  }
+  .about-main em { font-style: italic; color: #CECECE; }
+  .about-main .highlight { background: var(--accent); padding: 0 12px; color: var(--bg); font-style: normal; }
+
+  .values-section {
+    padding: 120px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+  .value {
+    padding: 50px 40px 60px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .value:nth-child(3n) { border-right: none; }
+  .value:not(:nth-last-child(-n+3))::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .value-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #CECECE;
+    letter-spacing: 0.2em;
+    margin-bottom: 30px;
+  }
+  .value-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.02em;
+  }
+  .value-desc { font-size: 15px; color: var(--ink-dim); line-height: 1.55; }
+
+  @media (max-width: 900px) {
+    .about-text-block { padding: 60px 20px 80px; }
+    .values-section { padding: 80px 20px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .value { border-right: none; padding: 40px 24px; }
+    .value:not(:last-child)::after { content: ""; display: block; }
+  }
+
+  .team-section {
+    padding: 120px 40px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+  }
+  .team-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .team-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+  }
+  .team-big .italic { font-style: italic; color: #CECECE; }
+  .team-big .outline { -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
+  .team-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .team-item {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .team-role {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    font-variation-settings: "opsz" 144;
+  }
+  .team-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #CECECE;
+    letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 900px) {
+    .team-row { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .trust-section {
+    padding: 120px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  .trust-item {
+    padding: 40px 30px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+  .trust-item:hover { background: var(--bg-alt); }
+  .trust-img {
+    width: 80%;
+    height: 110px;
+    object-fit: cover;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.3s;
+  }
+  .trust-item:hover .trust-img { opacity: 1; transform: scale(1.05); }
+  .trust-logo {
+    color: var(--ink);
+    text-align: center;
+    line-height: 1;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .trust-item:hover .trust-logo { opacity: 1; }
+  .trust-logo-wb {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3vw, 40px);
+    letter-spacing: -0.02em;
+  }
+  .trust-logo-tecno {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(24px, 2.8vw, 36px);
+    letter-spacing: 0.12em;
+  }
+  .trust-logo-velo {
+    font-family: 'Comfortaa', 'Fraunces', sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 2.8vw, 36px);
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 900px) {
+    .trust-section { padding: 80px 20px; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-item { min-height: 110px; padding: 28px 20px; }
+    .trust-img { height: 80px; }
+  }
+</style>
+
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="preloader-mark"/></div>
+    <div class="preloader-bar"></div>
+    <div class="preloader-pct">LOADING — ABOUT</div>
+  </div>
+</div>
+
+<div class="cursor-dot"></div>
+
+<nav class="main-nav">
+  <a href="../index.html" class="logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="logo-mark"/><span class="logo-text">sherim media</span><span class="meta">EST · 2020</span></a>
+  <div class="nav-center">
+    <a href="about.html" class="active">О нас</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="influence.html">Influence</a>
+    <a href="production.html">Production</a>
+    <a href="ugc.html">UGC</a>
+    <a href="contact.html">Контакты</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <select class="lang-select" aria-label="Language">
+        <option value="kk">KAZ</option>
+        <option value="ru" selected>RUS</option>
+        <option value="en">ENG</option>
+        <option value="ko">KOR</option>
+        <option value="zh">CHN</option>
+      </select>
+    </div>
+    <a href="brief.html" class="btn-nav">Заполнить бриф →</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="about.html">О нас</a>
+  <a href="cases.html">Кейсы</a>
+  <a href="influence.html">Influence Marketing</a>
+  <a href="production.html">Production</a>
+  <a href="ugc.html">UGC Content</a>
+  <a href="creative.html">Creative</a>
+  <a href="pr.html">PR</a>
+  <a href="contact.html">Контакты</a>
+  <a href="brief.html" style="color: #CECECE;">Заполнить бриф →</a>
+  <div class="mobile-lang">
+    <select class="lang-select" aria-label="Language">
+      <option value="kk">KAZ</option>
+      <option value="ru" selected>RUS</option>
+      <option value="en">ENG</option>
+      <option value="ko">KOR</option>
+      <option value="zh">CHN</option>
+    </select>
+  </div>
+  <div class="mobile-nav-foot">
+    <div>+7 705 951 5511</div>
+    <div>sherim.media@gmail.com</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumbs reveal">
+      <a href="../index.html">Главная</a>
+      <span class="sep">/</span>
+      <span style="color: #CECECE;">О нас</span>
+    </div>
+    <h1 class="page-title reveal"
+      data-ru='<span class="italic">Медиа</span><span class="block-font">компания</span><br><span class="outline">из Казахстана.</span>'
+      data-en='<span class="italic">Media</span><span class="block-font">company</span><br><span class="outline">from Kazakhstan.</span>'>
+      <span class="italic">Медиа</span><span class="block-font">компания</span><br>
+      <span class="outline">из Казахстана.</span>
+    </h1>
+    <p class="page-sub reveal"
+      data-ru="С 2020 года помогаем брендам расти, выстраивать узнаваемость и находить свою аудиторию. Больше 1000 реализованных проектов — и ещё столько же впереди."
+      data-en="Since 2020, we've been helping brands grow, build recognition and find their audience. Over 1000 projects delivered — and many more ahead.">С 2020 года помогаем брендам расти, выстраивать узнаваемость и находить свою аудиторию. Больше 1000 реализованных проектов — и ещё столько же впереди.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-row reveal-stagger">
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="1000" data-suffix="+">0</span></div>
+    <div class="stat-label">проектов за 5 лет</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="500" data-suffix="+">0</span></div>
+    <div class="stat-label">инфлюенсеров в базе</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="120" data-suffix="+">0</span></div>
+    <div class="stat-label">брендов-клиентов</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="98" data-suffix="%">0</span></div>
+    <div class="stat-label">возвращаются повторно</div>
+  </div>
+</section>
+
+<!-- ABOUT TEXT -->
+<section class="about-text-block">
+  <div class="section-head reveal">
+    <div class="section-num">[ 01 / КТО МЫ ]</div>
+    <h2 class="section-title">Философия</h2>
+  </div>
+  <p class="about-main reveal"
+    data-ru="sherim media — это команда, которая объединяет <em>креативное мышление</em>, аналитику и знание медиа-рынка Казахстана. Мы не работаем по принципу «запустили и забыли». Каждая кампания сопровождается аналитикой в реальном времени, и мы готовы <span class=&quot;highlight&quot;>корректировать тактику</span> на ходу."
+    data-en="sherim media is a team that combines <em>creative thinking</em>, analytics and knowledge of the Kazakhstan media market. We don't work on a 'launch and forget' basis. Every campaign is supported by real-time analytics, and we're ready to <span class=&quot;highlight&quot;>adjust the strategy</span> on the fly.">
+    sherim media — это команда, которая объединяет <em>креативное мышление</em>, аналитику и знание медиа-рынка Казахстана. Мы не работаем по принципу «запустили и забыли». Каждая кампания сопровождается аналитикой в реальном времени, и мы готовы <span class="highlight">корректировать тактику</span> на ходу.
+  </p>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-head reveal">
+    <div class="section-num">[ 02 / ЧТО ВАЖНО ]</div>
+    <h2 class="section-title" data-ru='Наши <span class="italic">принципы</span>' data-en='Our <span class="italic">principles</span>'>Наши <span class="italic">принципы</span></h2>
+  </div>
+  <div class="values-grid reveal-stagger">
+    <div class="value">
+      <div class="value-num">/ 01 PRINCIPLE</div>
+      <h3 class="value-title">Результат важнее процесса</h3>
+      <p class="value-desc">Красивый отчёт без движения метрик — провал. Мы считаем деньги клиента как свои и говорим, что сработало, а что нет.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">/ 02 PRINCIPLE</div>
+      <h3 class="value-title">Нативность без фальши</h3>
+      <p class="value-desc">Контент должен выглядеть честно. Если видно, что это реклама «за деньги», — мы плохо сделали свою работу.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">/ 03 PRINCIPLE</div>
+      <h3 class="value-title">Скорость без потери качества</h3>
+      <p class="value-desc">Тренды живут дни. Мы успеваем — благодаря тому, что процессы отлажены, а команда — на связи.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">/ 04 PRINCIPLE</div>
+      <h3 class="value-title">Прозрачность в цифрах</h3>
+      <p class="value-desc">Ни одного «мы не можем показать метрики по NDA». Если работаем — делимся данными и логикой решений.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">/ 05 PRINCIPLE</div>
+      <h3 class="value-title">Долгосрочные отношения</h3>
+      <p class="value-desc">98% клиентов возвращаются не потому, что мы «недорогие», а потому что работаем как внутренняя команда.</p>
+    </div>
+    <div class="value">
+      <div class="value-num">/ 06 PRINCIPLE</div>
+      <h3 class="value-title">Без шаблонов</h3>
+      <p class="value-desc">Каждый бренд — отдельный проект. Мы не переиспользуем стратегии и не вставляем вчерашние идеи в новый бриф.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="section-head reveal">
+    <div class="section-num">[ 03 / КОМАНДА ]</div>
+    <h2 class="section-title">Кто делает</h2>
+  </div>
+  <div class="team-row">
+    <div class="reveal">
+      <h3 class="team-big"
+        data-ru='Люди, которые <span class="italic">знают</span> своё <span class="outline">дело.</span>'
+        data-en='People who <span class="italic">know</span> their <span class="outline">craft.</span>'>
+        Люди, которые <span class="italic">знают</span> своё <span class="outline">дело.</span>
+      </h3>
+      <p style="margin-top: 30px; color: var(--ink-dim); font-size: 16px; line-height: 1.6; max-width: 440px;"
+        data-ru="Мы небольшая, но плотная команда. Каждый — профи в своём направлении. Никаких «менеджеров проектов на трёх клиентов»."
+        data-en="We're a compact but tight team. Each person is an expert in their field. No 'project managers spread across three clients'.">Мы небольшая, но плотная команда. Каждый — профи в своём направлении. Никаких «менеджеров проектов на трёх клиентов».</p>
+    </div>
+    <div class="team-list reveal-stagger">
+      <div class="team-item">
+        <div class="team-role">Стратеги и аккаунт-менеджеры</div>
+      </div>
+      <div class="team-item">
+        <div class="team-role">Креативная команда</div>
+      </div>
+      <div class="team-item">
+        <div class="team-role">Инфлюенс-менеджеры</div>
+      </div>
+      <div class="team-item">
+        <div class="team-role">Продакшн-команда</div>
+      </div>
+      <div class="team-item">
+        <div class="team-role">СМИ и копирайтеры</div>
+      </div>
+      <div class="team-item">
+        <div class="team-role">Аналитика и отчётность</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / CLIENTS -->
+<section class="trust-section">
+  <div class="section-head reveal">
+    <div class="section-num">[ 04 / КЛИЕНТЫ ]</div>
+    <h2 class="section-title" data-ru='Нам <span class="italic">доверяют</span>' data-en='They <span class="italic">trust</span> us'>Нам <span class="italic">доверяют</span></h2>
+  </div>
+  <div class="trust-grid reveal-stagger">
+    <div class="trust-item">
+      <div class="trust-logo trust-logo-wb">Wildberries</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-logo trust-logo-tecno">TECHNO</div>
+    </div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/veloesim.png" alt="Veloesim" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/kulikov.png" alt="Kulikov" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/dalba.png" alt="d'Alba" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/delonghi.png" alt="De'Longhi" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/vtcosmetics.png" alt="VT Cosmetics" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/geely.jpeg" alt="Geely" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/kerasys.png" alt="Kerasys" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/celimax.png" alt="celimax" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/anua.png" alt="Anua" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/axis-y.png" alt="AXIS-Y" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/garnier.png" alt="Garnier" loading="lazy" /></div>
+    <div class="trust-item"><img class="trust-img" src="../assets/cases/bayan-sulu.png" alt="Баян Сұлу" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- MINI CTA -->
+<section class="mini-cta">
+  <div class="mini-cta-inner">
+    <div class="mono reveal" style="margin-bottom: 20px;">[ Познакомимся ближе ]</div>
+    <h2 class="mini-cta-title reveal" data-ru='Поработаем <span class="italic">вместе</span>?' data-en='Shall we work <span class="italic">together</span>?'>Поработаем <span class="italic">вместе</span>?</h2>
+    <p class="mini-cta-sub reveal">Расскажите о задаче — вернёмся с идеями и пониманием, как мы можем быть полезны.</p>
+    <div class="mini-cta-buttons reveal">
+      <a href="brief.html" class="btn-big btn-primary">Заполнить бриф →</a>
+      <a href="contact.html" class="btn-big btn-secondary">Контакты</a>
+    </div>
+  </div>
+</section>
+
+<footer class="main-footer">
+  <div class="footer-big"><img class="footer-logo-img" src="../assets/logo-ring-grey.png" alt="sherim media rings logo" /></div>
+  <div class="footer-grid">
+    
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <a href="about.html">О нас</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="brief.html">Бриф</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+    <div class="footer-col">
+      <h5>Услуги</h5>
+      <a href="influence.html">Influence</a>
+      <a href="production.html">Production</a>
+      <a href="ugc.html">UGC</a>
+      <a href="creative.html">Creative</a>
+      <a href="pr.html">PR</a>
+    </div>
+    <div class="footer-col">
+      <h5>Связь</h5>
+      <a href="mailto:sherim.media@gmail.com">sherim.media@gmail.com</a>
+      <a href="https://wa.me/77719515511">+7 705 951 5511</a>
+      <a href="https://www.instagram.com/sherim.media/" target="_blank">Instagram ↗</a>
+      <p style="color: var(--ink-dim); margin-top: 10px;">Афциано, 35Б (Алматы)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2020—2026 ТОО «sherim media»</div>
+    <div>Sharing stories · Almaty / KZ</div>
+    <div><a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Наверх ↑</a></div>
+  </div>
+</footer>
+
+<script src="../assets/script.js"></script>
+<script src="../assets/lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Бриф · sherim media</title>
+<meta name="description" content="Заполните бриф sherim media — пара минут, и у нас есть всё, чтобы предложить решение." />
+<link rel="stylesheet" href="../assets/style.css" />
+<style>
+  .brief-wrap {
+    padding: 140px 40px 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .brief-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brief-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144;
+  }
+  .brief-title em { font-style: italic; color: #CECECE; }
+  .brief-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .brief-meta strong { display: block; color: #CECECE; font-size: 22px; margin-bottom: 4px; font-family: 'Archivo Black', sans-serif; letter-spacing: -0.01em;}
+
+  /* Progress bar */
+  .progress-wrap {
+    margin-bottom: 60px;
+    display: flex;
+    gap: 8px;
+  }
+  .progress-step {
+    flex: 1;
+    height: 3px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-step.active::after,
+  .progress-step.done::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform 0.5s;
+  }
+  .progress-step.active::after { background: var(--accent); }
+  .progress-step.done::after { background: var(--accent-2); }
+
+  /* Form */
+  .form-step {
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+  .form-step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #CECECE;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .step-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    font-variation-settings: "opsz" 144;
+  }
+  .step-title em { font-style: italic; color: #CECECE; }
+  .step-sub {
+    font-size: 16px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+    margin-bottom: 50px;
+    max-width: 640px;
+  }
+
+  /* Inputs */
+  .field-group { margin-bottom: 30px; }
+  .field-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .field-label .req { color: #CECECE; }
+
+  .field-input, .field-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px 0 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-variation-settings: "opsz" 144;
+  }
+  .field-input:focus, .field-textarea:focus { border-bottom-color: #CECECE; }
+  .field-input::placeholder, .field-textarea::placeholder { color: var(--ink-dim); font-style: italic; opacity: 0.5; }
+  .field-textarea { resize: vertical; min-height: 100px; font-size: 18px; line-height: 1.5; }
+
+  /* Choice grid (cards for selection) */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .choice-card {
+    padding: 24px 22px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .choice-card:hover { border-color: #CECECE; }
+  .choice-card.selected {
+    background: #CECECE;
+    border-color: #CECECE;
+    color: #1E1A19;
+  }
+  .choice-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice-icon {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .choice-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144;
+    font-style: italic;
+  }
+  .choice-desc {
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.4;
+  }
+  .choice-card.selected,
+  .choice-card.selected *,
+  .choice-card.selected .choice-desc {
+    color: #1E1A19 !important;
+    -webkit-text-stroke-color: #1E1A19 !important;
+  }
+
+  @media (max-width: 700px) {
+    .choice-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 400px) {
+    .choice-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Nav buttons */
+  .form-nav {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+    gap: 20px;
+  }
+  .form-nav .step-indicator {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+  }
+  .form-nav-right { display: flex; gap: 12px; }
+
+  .btn-prev, .btn-next {
+    padding: 16px 28px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-next {
+    background: #CECECE;
+    border-color: #CECECE;
+    color: #1E1A19 !important;
+  }
+  .btn-next:hover {
+    background: #CECECE;
+    color: #1E1A19 !important;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 #CECECE;
+    border-color: #CECECE;
+  }
+  .btn-prev:hover { border-color: var(--ink); }
+  .btn-prev:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* Success */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 0;
+    animation: fadeIn 0.8s ease;
+  }
+  .success-screen.visible { display: block; }
+  .success-icon {
+    width: 90px;
+    height: 90px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 40px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 40px;
+    color: var(--bg);
+    animation: successPop 0.6s cubic-bezier(0.2, 1.2, 0.4, 1);
+  }
+  @keyframes successPop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+  .success-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 20px;
+    line-height: 1.05;
+  }
+  .success-title em { font-style: italic; color: #CECECE; }
+  .success-sub {
+    font-size: 18px;
+    color: var(--ink-dim);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    .brief-wrap { padding: 100px 20px 60px; }
+    .brief-head { grid-template-columns: 1fr; gap: 20px; margin-bottom: 30px; }
+    .brief-meta { text-align: left; }
+    .form-nav { flex-direction: column-reverse; align-items: stretch; }
+    .form-nav-right { width: 100%; }
+    .btn-prev, .btn-next { flex: 1; justify-content: center; }
+  }
+</style>
+
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="preloader-mark"/></div>
+    <div class="preloader-bar"></div>
+    <div class="preloader-pct">LOADING — BRIEF</div>
+  </div>
+</div>
+
+<div class="cursor-dot"></div>
+
+<nav class="main-nav">
+  <a href="../index.html" class="logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="logo-mark"/><span class="logo-text">sherim media</span><span class="meta">EST · 2020</span></a>
+  <div class="nav-center">
+    <a href="about.html">О нас</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="influence.html">Influence</a>
+    <a href="production.html">Production</a>
+    <a href="ugc.html">UGC</a>
+    <a href="contact.html">Контакты</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <select class="lang-select" aria-label="Language">
+        <option value="kk">KAZ</option>
+        <option value="ru" selected>RUS</option>
+        <option value="en">ENG</option>
+        <option value="ko">KOR</option>
+        <option value="zh">CHN</option>
+      </select>
+    </div>
+    <a href="brief.html" class="btn-nav">Заполнить бриф →</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="about.html">О нас</a>
+  <a href="cases.html">Кейсы</a>
+  <a href="influence.html">Influence Marketing</a>
+  <a href="production.html">Production</a>
+  <a href="ugc.html">UGC Content</a>
+  <a href="creative.html">Creative</a>
+  <a href="pr.html">PR</a>
+  <a href="contact.html">Контакты</a>
+  <a href="brief.html" style="color: #CECECE;">Заполнить бриф →</a>
+  <div class="mobile-lang">
+    <select class="lang-select" aria-label="Language">
+      <option value="kk">KAZ</option>
+      <option value="ru" selected>RUS</option>
+      <option value="en">ENG</option>
+      <option value="ko">KOR</option>
+      <option value="zh">CHN</option>
+    </select>
+  </div>
+  <div class="mobile-nav-foot">
+    <div>+7 705 951 5511</div>
+    <div>sherim.media@gmail.com</div>
+  </div>
+</div>
+
+<div class="brief-wrap">
+
+  <div class="brief-head">
+    <h1 class="brief-title">
+      Бриф —<br>
+      <em>5 минут</em>
+    </h1>
+    <div class="brief-meta">
+      <strong>5 ШАГОВ</strong>
+      ~5 минут · отвечаем за день
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <form id="briefForm" novalidate>
+
+    <div class="progress-wrap">
+      <div class="progress-step active" data-step="1"></div>
+      <div class="progress-step" data-step="2"></div>
+      <div class="progress-step" data-step="3"></div>
+      <div class="progress-step" data-step="4"></div>
+      <div class="progress-step" data-step="5"></div>
+    </div>
+
+    <!-- STEP 1 — О КОМПАНИИ -->
+    <div class="form-step active" data-step="1">
+      <div class="step-num">[ ШАГ 01 / 05 ]</div>
+      <h2 class="step-title">Расскажите о <em>компании</em></h2>
+      <p class="step-sub">С чем работаете, что за бренд, сайт и/или соцсети. Нам важно понять контекст — это помогает сразу думать по делу.</p>
+
+      <div class="field-group">
+        <label class="field-label">Название компании <span class="req">*</span></label>
+        <input type="text" class="field-input" name="company" placeholder="sherim media, ТОО «...», бренд X" required />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Сайт / соцсети</label>
+        <input type="text" class="field-input" name="site" placeholder="sherim.media / @sherim.media" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Индустрия / что делаете</label>
+        <input type="text" class="field-input" name="industry" placeholder="например, beauty-ритейл, edtech, ресторан, FMCG..." />
+      </div>
+    </div>
+
+    <!-- STEP 2 — УСЛУГИ -->
+    <div class="form-step" data-step="2">
+      <div class="step-num">[ ШАГ 02 / 05 ]</div>
+      <h2 class="step-title">Что <em>интересует</em>?</h2>
+      <p class="step-sub">Можно выбрать несколько направлений. Если не уверены — отметьте самое близкое, остальное уточним.</p>
+
+      <div class="choice-grid" id="servicesGrid">
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="influence" />
+          <div class="choice-icon">01</div>
+          <div class="choice-name">Influence</div>
+          <div class="choice-desc">Блогеры, амбассадоры, интеграции</div>
+        </label>
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="production" />
+          <div class="choice-icon">02</div>
+          <div class="choice-name">Production</div>
+          <div class="choice-desc">Фото, видео, съёмки под ключ</div>
+        </label>
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="ugc" />
+          <div class="choice-icon">03</div>
+          <div class="choice-name">UGC</div>
+          <div class="choice-desc">Креаторский контент для рекламы</div>
+        </label>
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="creative" />
+          <div class="choice-icon">04</div>
+          <div class="choice-name">Creative</div>
+          <div class="choice-desc">Идеи, концепции, KV</div>
+        </label>
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="media" />
+          <div class="choice-icon">05</div>
+          <div class="choice-name">СМИ</div>
+          <div class="choice-desc">Публикации и работа со СМИ</div>
+        </label>
+        <label class="choice-card">
+          <input type="checkbox" name="services" value="pr" />
+          <div class="choice-icon">06</div>
+          <div class="choice-name">PR</div>
+          <div class="choice-desc">Работа со СМИ и репутация</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- STEP 3 — ЗАДАЧА -->
+    <div class="form-step" data-step="3">
+      <div class="step-num">[ ШАГ 03 / 05 ]</div>
+      <h2 class="step-title">Что <em>хотите</em> получить?</h2>
+      <p class="step-sub">Опишите задачу своими словами. Чем конкретнее — тем быстрее предложим решение. Не надо «я сам не знаю что хочу» — это тоже нормально, напишите как есть.</p>
+
+      <div class="field-group">
+        <label class="field-label">Задача <span class="req">*</span></label>
+        <textarea class="field-textarea" name="task" rows="5" placeholder="Пример: запускаем новый продукт, нужен охват в Казахстане. Хотим сделать серию reels с блогерами + съёмку для маркетплейса. Сейчас есть только название и продукт." required></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Целевая аудитория</label>
+        <input type="text" class="field-input" name="audience" placeholder="например, женщины 25-40, Алматы / Астана, средний+ доход" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Сроки / deadline</label>
+        <input type="text" class="field-input" name="deadline" placeholder="например, старт в январе, запуск до 15 марта" />
+      </div>
+    </div>
+
+    <!-- STEP 4 — БЮДЖЕТ -->
+    <div class="form-step" data-step="4">
+      <div class="step-num">[ ШАГ 04 / 05 ]</div>
+      <h2 class="step-title">И про <em>бюджет</em></h2>
+      <p class="step-sub">Диапазон помогает сразу предложить адекватный масштаб решения. Если совсем не знаете — выбирайте «обсудим», не проблема.</p>
+
+      <div class="choice-grid">
+        <label class="choice-card">
+          <input type="radio" name="budget" value="<500k" />
+          <div class="choice-icon">S</div>
+          <div class="choice-name">До 500К ₸</div>
+          <div class="choice-desc">Небольшой запуск, пилот</div>
+        </label>
+        <label class="choice-card">
+          <input type="radio" name="budget" value="500k-2m" />
+          <div class="choice-icon">M</div>
+          <div class="choice-name">500К — 2М ₸</div>
+          <div class="choice-desc">Кампания, 1-2 направления</div>
+        </label>
+        <label class="choice-card">
+          <input type="radio" name="budget" value="2m-5m" />
+          <div class="choice-icon">L</div>
+          <div class="choice-name">2М — 5М ₸</div>
+          <div class="choice-desc">Комплексный проект</div>
+        </label>
+        <label class="choice-card">
+          <input type="radio" name="budget" value="5m-10m" />
+          <div class="choice-icon">XL</div>
+          <div class="choice-name">5М — 10М ₸</div>
+          <div class="choice-desc">Полная интегрированная кампания</div>
+        </label>
+        <label class="choice-card">
+          <input type="radio" name="budget" value=">10m" />
+          <div class="choice-icon">XXL</div>
+          <div class="choice-name">10М+ ₸</div>
+          <div class="choice-desc">Годовой контракт, full-service</div>
+        </label>
+        <label class="choice-card">
+          <input type="radio" name="budget" value="tbd" />
+          <div class="choice-icon">?</div>
+          <div class="choice-name">Обсудим</div>
+          <div class="choice-desc">Пока не знаю</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- STEP 5 — КОНТАКТ -->
+    <div class="form-step" data-step="5">
+      <div class="step-num">[ ШАГ 05 / 05 ]</div>
+      <h2 class="step-title">Как с вами <em>связаться</em>?</h2>
+      <p class="step-sub">Последний шаг. Вернёмся в течение дня с вопросами или предложением. Никакого спама, обещаем.</p>
+
+      <div class="field-group">
+        <label class="field-label">Ваше имя <span class="req">*</span></label>
+        <input type="text" class="field-input" name="name" placeholder="Иван, Айгерим, Чингиз" required />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Email <span class="req">*</span></label>
+        <input type="email" class="field-input" name="email" placeholder="you@brand.kz" required />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Телефон / WhatsApp</label>
+        <input type="tel" class="field-input" name="phone" placeholder="+7 ___ ___ __ __" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Откуда о нас узнали</label>
+        <input type="text" class="field-input" name="source" placeholder="например, Instagram, Google, рекомендация" />
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="form-nav">
+      <div class="step-indicator">ШАГ <span id="currentStep">01</span> / 05</div>
+      <div class="form-nav-right">
+        <button type="button" class="btn-prev" id="btnPrev" disabled>← Назад</button>
+        <button type="button" class="btn-next" id="btnNext">Далее →</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2 class="success-title">
+      Готово. <em>Спасибо!</em><br>
+      Скоро напишем.
+    </h2>
+    <p class="success-sub">Мы получили ваш бриф и свяжемся в течение рабочего дня по email или WhatsApp. Если хочется ускориться — напишите нам напрямую.</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="../index.html" class="btn-big btn-primary">На главную →</a>
+      <a href="https://wa.me/77719515511" class="btn-big btn-secondary">Написать в WhatsApp</a>
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/script.js"></script>
+<script>
+  // Form wizard logic
+  const steps = document.querySelectorAll('.form-step');
+  const progress = document.querySelectorAll('.progress-step');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const currentStepEl = document.getElementById('currentStep');
+  let current = 1;
+  const total = steps.length;
+
+  function showStep(n) {
+    steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === n));
+    progress.forEach(p => {
+      const step = parseInt(p.dataset.step);
+      p.classList.remove('active', 'done');
+      if (step < n) p.classList.add('done');
+      else if (step === n) p.classList.add('active');
+    });
+    currentStepEl.textContent = String(n).padStart(2, '0');
+    btnPrev.disabled = n === 1;
+    btnNext.textContent = n === total ? 'Отправить →' : 'Далее →';
+    window.scrollTo({ top: document.querySelector('.brief-wrap').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  function validateStep(n) {
+    const stepEl = document.querySelector(`.form-step[data-step="${n}"]`);
+    const required = stepEl.querySelectorAll('[required]');
+    for (const el of required) {
+      if (!el.value.trim()) {
+        el.focus();
+        el.style.borderBottomColor = 'var(--accent)';
+        const label = el.closest('.field-group')?.querySelector('.field-label');
+        if (label) {
+          const original = label.textContent;
+          label.style.color = 'var(--accent)';
+          label.textContent = '↑ Пожалуйста, заполните это поле';
+          setTimeout(() => {
+            label.style.color = '';
+            label.textContent = original;
+            el.style.borderBottomColor = '';
+          }, 2500);
+        }
+        return false;
+      }
+      if (el.type === 'email' && !/\S+@\S+\.\S+/.test(el.value)) {
+        el.focus();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  btnNext.addEventListener('click', () => {
+    if (!validateStep(current)) return;
+    if (current < total) {
+      current++;
+      showStep(current);
+    } else {
+      // Submit
+      document.getElementById('briefForm').style.display = 'none';
+      document.querySelector('.brief-head').style.display = 'none';
+      document.getElementById('successScreen').classList.add('visible');
+      // Here you'd normally POST to backend
+    }
+  });
+
+  btnPrev.addEventListener('click', () => {
+    if (current > 1) {
+      current--;
+      showStep(current);
+    }
+  });
+
+  // Choice card selection (visual)
+  document.querySelectorAll('.choice-card').forEach(card => {
+    const input = card.querySelector('input');
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (input.type === 'radio') {
+        // Deselect siblings
+        card.parentElement.querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        input.checked = true;
+      } else {
+        card.classList.toggle('selected');
+        input.checked = card.classList.contains('selected');
+      }
+    });
+  });
+
+  // Enter key moves to next step
+  document.querySelectorAll('.field-input').forEach(inp => {
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btnNext.click();
+      }
+    });
+  });
+</script>
+<script src="../assets/lang.js"></script>
+</body>
+</html>

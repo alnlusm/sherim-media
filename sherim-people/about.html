@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>О нас · sherim.people</title>
+<meta name="description" content="О редакции sherim people — медиа о людях, бизнесе и предпринимателях Казахстана." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0F0D0C; --bg-2: #181614; --bg-3: #1E1B19;
+  --ink: #ffffff; --ink-2: #E8E4DF; --ink-3: #635C57;
+  --line: rgba(232,228,223,0.09);
+  --accent: rgba(206,206,206,0.55); --accent-bright: #CECECE;
+}
+[data-theme="light"] {
+  --bg: #F7F5F2; --bg-2: #EFECE9; --bg-3: #E5E2DF;
+  --ink: #0F0D0C; --ink-2: #2A2521; --ink-3: #8A8078;
+  --line: rgba(15,13,12,0.1);
+  --accent: rgba(30,26,25,0.5); --accent-bright: #1E1A19;
+}
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Comfortaa', system-ui, sans-serif;
+  font-weight: 400; line-height: 1.6; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* TOPBAR */
+.sp-topbar {
+  border-bottom: 1px solid var(--line); padding: 8px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+}
+.sp-topbar-left a { color: var(--ink-3); transition: color 0.2s; }
+.sp-topbar-left a:hover { color: var(--ink-2); }
+.sp-topbar-right { display: flex; gap: 14px; align-items: center; }
+.sp-lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Comfortaa', sans-serif; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); transition: color 0.2s; padding: 0;
+}
+.sp-lang-btn.active { color: var(--ink); }
+.sp-lang-sep { color: var(--ink-3); }
+
+/* HEADER */
+.sp-header {
+  border-bottom: 1px solid var(--line); padding: 0 40px;
+  background: var(--bg); position: sticky; top: 0; z-index: 200;
+  transition: background 0.3s;
+}
+.sp-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; height: 60px;
+}
+.sp-logo { display: flex; flex-direction: column; flex-shrink: 0; }
+.sp-logo-name {
+  font-family: 'Comfortaa', sans-serif; font-weight: 700;
+  font-size: 22px; letter-spacing: -0.03em; color: var(--ink); line-height: 1;
+}
+.sp-logo-name span { color: var(--accent); }
+.sp-logo-sub {
+  font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 3px;
+}
+.sp-nav {
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; scrollbar-width: none; flex: 1; justify-content: flex-end;
+}
+.sp-nav::-webkit-scrollbar { display: none; }
+.sp-nav a {
+  font-family: 'Comfortaa', sans-serif; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+  padding: 8px 14px; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.sp-nav a:hover { color: var(--ink); }
+.sp-nav a.active { color: var(--ink); border-bottom-color: var(--accent-bright); }
+.sp-nav-cta {
+  margin-left: 10px; padding: 6px 16px !important;
+  border: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important;
+  color: var(--ink-2) !important; transition: all 0.2s !important;
+}
+.sp-nav-cta:hover { background: var(--bg-3) !important; border-color: var(--accent-bright) !important; color: var(--ink) !important; }
+.sp-theme-toggle {
+  background: none; border: 1px solid var(--line); color: var(--ink-3);
+  cursor: pointer; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0; transition: all 0.2s; margin-left: 8px;
+}
+.sp-theme-toggle:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* PAGE HERO */
+.sp-page-hero {
+  padding: 80px 40px 60px; border-bottom: 1px solid var(--line);
+}
+.sp-breadcrumbs {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+  margin-bottom: 28px; display: flex; gap: 8px; align-items: center;
+}
+.sp-breadcrumbs a { color: var(--ink-3); transition: color 0.2s; }
+.sp-breadcrumbs a:hover { color: var(--ink-2); }
+.sp-page-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.05; color: var(--ink); letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.sp-page-title em { font-style: italic; color: var(--ink-3); }
+.sp-page-sub {
+  font-size: 16px; line-height: 1.7; color: var(--ink-2);
+  max-width: 640px;
+}
+
+/* CONTENT */
+.sp-about-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; padding: 80px 40px; border-bottom: 1px solid var(--line);
+  max-width: 1400px;
+}
+.sp-about-text h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: 28px; letter-spacing: -0.02em;
+  margin-bottom: 20px; color: var(--ink);
+}
+.sp-about-text p {
+  font-size: 15px; line-height: 1.75; color: var(--ink-2); margin-bottom: 16px;
+}
+.sp-about-text p:last-child { margin-bottom: 0; }
+
+/* Certificate placeholder */
+.sp-cert-block {
+  padding: 80px 40px; border-bottom: 1px solid var(--line);
+}
+.sp-cert-block h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: 24px; letter-spacing: -0.02em;
+  margin-bottom: 30px; color: var(--ink);
+}
+.sp-cert-placeholder {
+  border: 1px solid var(--line); background: var(--bg-2);
+  padding: 60px 40px; text-align: center; max-width: 640px;
+}
+.sp-cert-placeholder .cert-icon {
+  font-size: 40px; color: var(--ink-3); margin-bottom: 16px;
+}
+.sp-cert-placeholder p {
+  font-size: 13px; color: var(--ink-3); letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+.sp-cert-placeholder .cert-num {
+  font-family: 'Comfortaa', sans-serif; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 16px;
+}
+
+/* Contact form */
+.sp-contact-block {
+  padding: 80px 40px; border-bottom: 1px solid var(--line);
+  max-width: 1400px;
+}
+.sp-contact-block h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: 28px; letter-spacing: -0.02em;
+  margin-bottom: 40px; color: var(--ink);
+}
+.sp-contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.sp-form { display: flex; flex-direction: column; gap: 20px; }
+.sp-form-group { display: flex; flex-direction: column; gap: 8px; }
+.sp-form-group label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+}
+.sp-form-group input,
+.sp-form-group textarea {
+  background: var(--bg-2); border: 1px solid var(--line);
+  color: var(--ink); font-family: 'Comfortaa', sans-serif;
+  font-size: 14px; padding: 14px 18px; outline: none;
+  transition: border-color 0.2s; resize: vertical;
+}
+.sp-form-group input:focus,
+.sp-form-group textarea:focus { border-color: var(--ink-3); }
+.sp-form-group textarea { min-height: 120px; }
+.sp-form-submit {
+  padding: 14px 32px; background: none;
+  border: 1px solid var(--accent-bright); color: var(--ink);
+  font-family: 'Comfortaa', sans-serif; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; align-self: flex-start;
+}
+.sp-form-submit:hover { background: var(--bg-3); }
+
+.sp-contact-info { display: flex; flex-direction: column; gap: 32px; }
+.sp-contact-info-item h4 {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 8px; font-family: 'Comfortaa', sans-serif;
+}
+.sp-contact-info-item a,
+.sp-contact-info-item p {
+  font-size: 15px; color: var(--ink-2); transition: color 0.2s;
+}
+.sp-contact-info-item a:hover { color: var(--ink); }
+
+/* FOOTER */
+.sp-footer {
+  border-top: 1px solid var(--line); padding: 40px 40px 28px; background: var(--bg-2);
+}
+.sp-footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 14px; font-size: 10px; letter-spacing: 0.1em;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+}
+.sp-footer-bottom a { color: var(--ink-3); transition: color 0.2s; }
+.sp-footer-bottom a:hover { color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .sp-topbar, .sp-header, .sp-page-hero, .sp-about-body,
+  .sp-cert-block, .sp-contact-block, .sp-footer { padding-left: 20px; padding-right: 20px; }
+  .sp-about-body { grid-template-columns: 1fr; gap: 40px; }
+  .sp-contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sp-nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="sp-topbar">
+  <div class="sp-topbar-left">
+    <a href="../index.html" data-ru="← sherim media" data-en="← sherim media">← sherim media</a>
+  </div>
+  <div class="sp-topbar-right">
+    <button class="sp-lang-btn active" data-lang="ru">RU</button>
+    <span class="sp-lang-sep">/</span>
+    <button class="sp-lang-btn" data-lang="en">EN</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="sp-header">
+  <div class="sp-header-inner">
+    <a href="index.html" class="sp-logo">
+      <div class="sp-logo-name">sherim<span>.</span>people</div>
+      <div class="sp-logo-sub" data-ru="медиа о людях и бизнесе" data-en="media about people & business">медиа о людях и бизнесе</div>
+    </a>
+    <nav class="sp-nav">
+      <a href="#" data-ru="Интервью" data-en="Interviews">Интервью</a>
+      <a href="#" data-ru="Кейсы" data-en="Cases">Кейсы</a>
+      <a href="#" data-ru="Новости" data-en="News">Новости</a>
+      <a href="#" data-ru="Разборы" data-en="Analysis">Разборы</a>
+      <a href="#" data-ru="Колонки" data-en="Columns">Колонки</a>
+      <a href="advertisers.html" class="sp-nav-cta" data-ru="Рекламодателям" data-en="Advertisers">Рекламодателям</a>
+    </nav>
+    <button class="sp-theme-toggle" id="themeToggle" aria-label="Toggle theme">◑</button>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="sp-page-hero">
+  <div class="sp-breadcrumbs">
+    <a href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+    <span>/</span>
+    <span data-ru="О нас" data-en="About">О нас</span>
+  </div>
+  <h1 class="sp-page-title" data-ru='О <em>редакции</em>' data-en='About <em>us</em>'>О <em>редакции</em></h1>
+  <p class="sp-page-sub" data-ru="sherim people — это независимое медиа о людях, бизнесе и предпринимательстве в Казахстане." data-en="sherim people is an independent media about people, business and entrepreneurship in Kazakhstan.">sherim people — это независимое медиа о людях, бизнесе и предпринимательстве в Казахстане.</p>
+</div>
+
+<!-- ABOUT TEXT -->
+<div class="sp-about-body">
+  <div class="sp-about-text">
+    <h2 data-ru="Кто мы" data-en="Who we are">Кто мы</h2>
+    <p data-ru="sherim people — медиа от команды sherim media. Мы пишем о предпринимателях, креаторах, необычных кейсах и актуальных новостях медиарынка Казахстана." data-en="sherim people is a media project by the sherim media team. We write about entrepreneurs, creators, unusual business cases and current media market news in Kazakhstan.">
+      sherim people — медиа от команды sherim media. Мы пишем о предпринимателях, креаторах, необычных кейсах и актуальных новостях медиарынка Казахстана.
+    </p>
+    <p data-ru="Нам важно рассказывать настоящие истории — без глянца и пустых вдохновляющих заголовков. Мы идём к людям с одним вопросом: как на самом деле устроен ваш бизнес и жизнь." data-en="We care about telling real stories — without gloss and empty inspiring headlines. We go to people with one question: how does your business and life really work.">
+      Нам важно рассказывать настоящие истории — без глянца и пустых вдохновляющих заголовков. Мы идём к людям с одним вопросом: как на самом деле устроен ваш бизнес и жизнь.
+    </p>
+  </div>
+  <div class="sp-about-text">
+    <h2 data-ru="Форматы" data-en="Formats">Форматы</h2>
+    <p data-ru="Интервью с предпринимателями и лидерами рынка. Глубокие кейсы о реальных кампаниях. Разборы трендов и новостей медиарынка. Авторские колонки от практиков." data-en="Interviews with entrepreneurs and market leaders. Deep case studies on real campaigns. Analysis of media market trends and news. Expert columns by practitioners.">
+      Интервью с предпринимателями и лидерами рынка. Глубокие кейсы о реальных кампаниях. Разборы трендов и новостей медиарынка. Авторские колонки от практиков.
+    </p>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="sp-cert-block">
+  <h2 data-ru="Свидетельство о регистрации СМИ" data-en="Media registration certificate">Свидетельство о регистрации СМИ</h2>
+  <div class="sp-cert-placeholder">
+    <div class="cert-icon">📄</div>
+    <p data-ru="Свидетельство о постановке на учёт средства массовой информации" data-en="Certificate of registration of a mass media outlet">Свидетельство о постановке на учёт средства массовой информации</p>
+    <div class="cert-num" data-ru="№ — · Алматы, Казахстан" data-en="№ — · Almaty, Kazakhstan">№ — · Алматы, Казахстан</div>
+  </div>
+</div>
+
+<!-- CONTACT FORM -->
+<div class="sp-contact-block">
+  <h2 data-ru="Связаться с редакцией" data-en="Contact the editorial team">Связаться с редакцией</h2>
+  <div class="sp-contact-grid">
+    <form class="sp-form" action="mailto:sherim.media@gmail.com" method="POST" enctype="text/plain">
+      <div class="sp-form-group">
+        <label data-ru="Ваше имя" data-en="Your name">Ваше имя</label>
+        <input type="text" name="name" placeholder="Айгерим Сейткали" required />
+      </div>
+      <div class="sp-form-group">
+        <label data-ru="Email" data-en="Email">Email</label>
+        <input type="email" name="email" placeholder="name@example.com" required />
+      </div>
+      <div class="sp-form-group">
+        <label data-ru="Тема" data-en="Subject">Тема</label>
+        <input type="text" name="subject" placeholder="Предложить материал / Сотрудничество" />
+      </div>
+      <div class="sp-form-group">
+        <label data-ru="Сообщение" data-en="Message">Сообщение</label>
+        <textarea name="message" placeholder="Расскажите о вашей идее или вопросе..."></textarea>
+      </div>
+      <button type="submit" class="sp-form-submit" data-ru="Отправить →" data-en="Send →">Отправить →</button>
+    </form>
+
+    <div class="sp-contact-info">
+      <div class="sp-contact-info-item">
+        <h4 data-ru="Email редакции" data-en="Editorial email">Email редакции</h4>
+        <a href="mailto:sherim.media@gmail.com">sherim.media@gmail.com</a>
+      </div>
+      <div class="sp-contact-info-item">
+        <h4 data-ru="Telegram" data-en="Telegram">Telegram</h4>
+        <a href="https://t.me/sherim_people" target="_blank" rel="noopener">@sherim_people</a>
+      </div>
+      <div class="sp-contact-info-item">
+        <h4 data-ru="Instagram" data-en="Instagram">Instagram</h4>
+        <a href="https://www.instagram.com/sherim.people/" target="_blank" rel="noopener">@sherim.people</a>
+      </div>
+      <div class="sp-contact-info-item">
+        <h4 data-ru="По вопросам рекламы" data-en="Advertising inquiries">По вопросам рекламы</h4>
+        <a href="advertisers.html" data-ru="Страница рекламодателям →" data-en="Advertisers page →">Страница рекламодателям →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sp-footer">
+  <div class="sp-footer-bottom">
+    <span data-ru="© 2026 sherim people · Алматы, Казахстан" data-en="© 2026 sherim people · Almaty, Kazakhstan">© 2026 sherim people · Алматы, Казахстан</span>
+    <a href="../index.html" data-ru="← Вернуться на sherim media" data-en="← Back to sherim media">← Вернуться на sherim media</a>
+  </div>
+</footer>
+
+<script>
+function applyLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-ru],[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) {
+      if (val.includes('<')) el.innerHTML = val;
+      else el.textContent = val;
+    }
+  });
+  document.querySelectorAll('.sp-lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('sherim-lang', lang); } catch(e) {}
+}
+document.querySelectorAll('.sp-lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+});
+const savedLang = (() => { try { return localStorage.getItem('sherim-lang'); } catch(e) { return null; } })();
+if (savedLang === 'en') applyLang('en');
+
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '◑' : '◐';
+  try { localStorage.setItem('sherim-people-theme', theme); } catch(e) {}
+}
+themeToggle.addEventListener('click', () => {
+  setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+const savedTheme = (() => { try { return localStorage.getItem('sherim-people-theme'); } catch(e) { return null; } })();
+if (savedTheme) setTheme(savedTheme);
+</script>
+</body>
+</html>

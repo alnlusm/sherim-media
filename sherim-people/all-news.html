@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Все новости · sherim.people</title>
+<meta name="description" content="Все материалы sherim people — интервью, кейсы, новости, разборы и колонки." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0F0D0C; --bg-2: #181614; --bg-3: #1E1B19;
+  --ink: #ffffff; --ink-2: #E8E4DF; --ink-3: #635C57;
+  --line: rgba(232,228,223,0.09);
+  --accent: rgba(206,206,206,0.55); --accent-bright: #CECECE;
+}
+[data-theme="light"] {
+  --bg: #F7F5F2; --bg-2: #EFECE9; --bg-3: #E5E2DF;
+  --ink: #0F0D0C; --ink-2: #2A2521; --ink-3: #8A8078;
+  --line: rgba(15,13,12,0.1);
+  --accent: rgba(30,26,25,0.5); --accent-bright: #1E1A19;
+}
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: 'Comfortaa', system-ui, sans-serif;
+  font-weight: 400; line-height: 1.6; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.sp-topbar {
+  border-bottom: 1px solid var(--line); padding: 8px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+}
+.sp-topbar-left a { color: var(--ink-3); transition: color 0.2s; }
+.sp-topbar-left a:hover { color: var(--ink-2); }
+.sp-topbar-right { display: flex; gap: 14px; align-items: center; }
+.sp-lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Comfortaa', sans-serif; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); transition: color 0.2s; padding: 0;
+}
+.sp-lang-btn.active { color: var(--ink); }
+.sp-lang-sep { color: var(--ink-3); }
+
+.sp-header {
+  border-bottom: 1px solid var(--line); padding: 0 40px;
+  background: var(--bg); position: sticky; top: 0; z-index: 200;
+  transition: background 0.3s;
+}
+.sp-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; height: 60px;
+}
+.sp-logo { display: flex; flex-direction: column; flex-shrink: 0; }
+.sp-logo-name {
+  font-family: 'Comfortaa', sans-serif; font-weight: 700;
+  font-size: 22px; letter-spacing: -0.03em; color: var(--ink); line-height: 1;
+}
+.sp-logo-name span { color: var(--accent); }
+.sp-logo-sub {
+  font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); margin-top: 3px;
+}
+.sp-nav {
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; scrollbar-width: none; flex: 1; justify-content: flex-end;
+}
+.sp-nav::-webkit-scrollbar { display: none; }
+.sp-nav a {
+  font-family: 'Comfortaa', sans-serif; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+  padding: 8px 14px; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.sp-nav a:hover { color: var(--ink); }
+.sp-nav a.active { color: var(--ink); border-bottom-color: var(--accent-bright); }
+.sp-nav-cta {
+  margin-left: 10px; padding: 6px 16px !important;
+  border: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important;
+  color: var(--ink-2) !important; transition: all 0.2s !important;
+}
+.sp-nav-cta:hover { background: var(--bg-3) !important; border-color: var(--accent-bright) !important; color: var(--ink) !important; }
+.sp-theme-toggle {
+  background: none; border: 1px solid var(--line); color: var(--ink-3);
+  cursor: pointer; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0; transition: all 0.2s; margin-left: 8px;
+}
+.sp-theme-toggle:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* PAGE HERO */
+.sp-page-hero {
+  padding: 60px 40px 40px; border-bottom: 1px solid var(--line);
+}
+.sp-breadcrumbs {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+  margin-bottom: 24px; display: flex; gap: 8px; align-items: center;
+}
+.sp-breadcrumbs a { color: var(--ink-3); transition: color 0.2s; }
+.sp-breadcrumbs a:hover { color: var(--ink-2); }
+.sp-page-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 8px;
+}
+.sp-page-title em { font-style: italic; color: var(--ink-3); }
+
+/* FILTER */
+.sp-filter {
+  padding: 24px 40px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+.sp-filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all 0.2s; color: var(--ink-2); background: transparent;
+}
+.sp-filter-btn:hover { border-color: var(--ink-3); color: var(--ink); }
+.sp-filter-btn.active { background: var(--bg-3); border-color: var(--accent-bright); color: var(--ink); }
+
+/* NEWS LIST */
+.sp-news-body {
+  padding: 0 40px 80px;
+  max-width: 1400px;
+}
+.sp-news-full-list { display: flex; flex-direction: column; }
+.sp-news-row {
+  display: grid; grid-template-columns: 200px 1fr auto;
+  gap: 28px; align-items: start;
+  padding: 28px 0; border-bottom: 1px solid var(--line);
+  cursor: pointer; transition: opacity 0.2s;
+}
+.sp-news-row:hover { opacity: 0.8; }
+.sp-news-row-cover {
+  aspect-ratio: 4/3; background: var(--bg-3); overflow: hidden; flex-shrink: 0;
+}
+.sp-news-row-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.sp-news-row:hover .sp-news-row-cover img { transform: scale(1.04); }
+.sp-news-row-cover-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); opacity: 0.15; font-size: 22px;
+}
+.sp-news-row-body {}
+.sp-news-row-cat {
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  font-family: 'Comfortaa', sans-serif; margin-bottom: 8px;
+}
+.sp-news-row-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; font-size: 18px; line-height: 1.3;
+  color: var(--ink); letter-spacing: -0.01em; margin-bottom: 8px;
+}
+.sp-news-row-excerpt {
+  font-size: 13px; color: var(--ink-2); line-height: 1.6;
+}
+.sp-news-row-meta {
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+  white-space: nowrap; padding-top: 4px;
+}
+
+/* FOOTER */
+.sp-footer {
+  border-top: 1px solid var(--line); padding: 40px 40px 28px; background: var(--bg-2);
+}
+.sp-footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 14px; font-size: 10px; letter-spacing: 0.1em;
+  color: var(--ink-3); font-family: 'Comfortaa', sans-serif;
+}
+.sp-footer-bottom a { color: var(--ink-3); transition: color 0.2s; }
+.sp-footer-bottom a:hover { color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .sp-topbar, .sp-header, .sp-page-hero, .sp-filter, .sp-news-body, .sp-footer { padding-left: 20px; padding-right: 20px; }
+  .sp-news-row { grid-template-columns: 140px 1fr; }
+  .sp-news-row-meta { display: none; }
+  .sp-nav { display: none; }
+}
+@media (max-width: 520px) {
+  .sp-news-row { grid-template-columns: 1fr; }
+  .sp-news-row-cover { aspect-ratio: 16/9; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="sp-topbar">
+  <div class="sp-topbar-left">
+    <a href="../index.html">← sherim media</a>
+  </div>
+  <div class="sp-topbar-right">
+    <button class="sp-lang-btn active" data-lang="ru">RU</button>
+    <span class="sp-lang-sep">/</span>
+    <button class="sp-lang-btn" data-lang="en">EN</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="sp-header">
+  <div class="sp-header-inner">
+    <a href="index.html" class="sp-logo">
+      <div class="sp-logo-name">sherim<span>.</span>people</div>
+      <div class="sp-logo-sub" data-ru="медиа о людях и бизнесе" data-en="media about people & business">медиа о людях и бизнесе</div>
+    </a>
+    <nav class="sp-nav">
+      <a href="#" class="active" data-ru="Интервью" data-en="Interviews">Интервью</a>
+      <a href="#" data-ru="Кейсы" data-en="Cases">Кейсы</a>
+      <a href="#" data-ru="Новости" data-en="News">Новости</a>
+      <a href="#" data-ru="Разборы" data-en="Analysis">Разборы</a>
+      <a href="#" data-ru="Колонки" data-en="Columns">Колонки</a>
+      <a href="advertisers.html" class="sp-nav-cta" data-ru="Рекламодателям" data-en="Advertisers">Рекламодателям</a>
+    </nav>
+    <button class="sp-theme-toggle" id="themeToggle" aria-label="Toggle theme">◑</button>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="sp-page-hero">
+  <div class="sp-breadcrumbs">
+    <a href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+    <span>/</span>
+    <span data-ru="Все материалы" data-en="All stories">Все материалы</span>
+  </div>
+  <h1 class="sp-page-title" data-ru='Все <em>материалы</em>' data-en='All <em>stories</em>'>Все <em>материалы</em></h1>
+</div>
+
+<!-- FILTER -->
+<div class="sp-filter">
+  <button class="sp-filter-btn active" data-cat="all" data-ru="Все" data-en="All">Все</button>
+  <button class="sp-filter-btn" data-cat="interview" data-ru="Интервью" data-en="Interviews">Интервью</button>
+  <button class="sp-filter-btn" data-cat="case" data-ru="Кейсы" data-en="Cases">Кейсы</button>
+  <button class="sp-filter-btn" data-cat="news" data-ru="Новости" data-en="News">Новости</button>
+  <button class="sp-filter-btn" data-cat="analysis" data-ru="Разборы" data-en="Analysis">Разборы</button>
+  <button class="sp-filter-btn" data-cat="column" data-ru="Колонки" data-en="Columns">Колонки</button>
+</div>
+
+<!-- NEWS LIST -->
+<div class="sp-news-body">
+  <div class="sp-news-full-list" id="newsList">
+
+    <a href="#" class="sp-news-row" data-cat="interview">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Интервью" data-en="Interview">Интервью</div>
+        <div class="sp-news-row-title" data-ru="«Начинал с нуля, сейчас оборот — 2 млрд тенге»: история основателя Chocofood" data-en="'Started from scratch, now turnover 2B tenge': the Chocofood founder story">«Начинал с нуля, сейчас оборот — 2 млрд тенге»: история основателя Chocofood</div>
+        <div class="sp-news-row-excerpt" data-ru="Разговор с предпринимателем о том, как он строил один из первых food-delivery сервисов Казахстана." data-en="A conversation on building Kazakhstan's first food-delivery service.">Разговор с предпринимателем о том, как он строил один из первых food-delivery сервисов Казахстана.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="3 июня 2026 · 10 мин" data-en="June 3, 2026 · 10 min">3 июня 2026 · 10 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="news">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Новости" data-en="News">Новости</div>
+        <div class="sp-news-row-title" data-ru="Instagram снова меняет алгоритм: что важно знать брендам прямо сейчас" data-en="Instagram changes its algorithm again: what brands need to know right now">Instagram снова меняет алгоритм: что важно знать брендам прямо сейчас</div>
+        <div class="sp-news-row-excerpt" data-ru="Новый апдейт коснётся рекламных размещений и органического охвата для бизнес-аккаунтов." data-en="The new update will affect paid placements and organic reach for business accounts.">Новый апдейт коснётся рекламных размещений и органического охвата для бизнес-аккаунтов.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="2 июня 2026 · 4 мин" data-en="June 2, 2026 · 4 min">2 июня 2026 · 4 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="interview">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Интервью" data-en="Interview">Интервью</div>
+        <div class="sp-news-row-title" data-ru="«Мне было 19, когда я запустила свой первый онлайн-магазин»: история Аиши" data-en="'I was 19 when I launched my first online store': Aisha's story">«Мне было 19, когда я запустила свой первый онлайн-магазин»: история Аиши</div>
+        <div class="sp-news-row-excerpt" data-ru="История о том, как молодая предпринимательница выстроила бизнес без инвестиций." data-en="The story of how a young entrepreneur built a business without investments.">История о том, как молодая предпринимательница выстроила бизнес без инвестиций.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="1 июня 2026 · 8 мин" data-en="June 1, 2026 · 8 min">1 июня 2026 · 8 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="case">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Кейс" data-en="Case">Кейс</div>
+        <div class="sp-news-row-title" data-ru="Как казахстанский бьюти-бренд вырос с 3к до 180к подписчиков за 4 месяца" data-en="How a Kazakh beauty brand grew from 3K to 180K followers in 4 months">Как казахстанский бьюти-бренд вырос с 3к до 180к подписчиков за 4 месяца</div>
+        <div class="sp-news-row-excerpt" data-ru="Разбираем стратегию роста: UGC, инфлюенсеры и правильный timing." data-en="Breaking down the growth strategy: UGC, influencers and right timing.">Разбираем стратегию роста: UGC, инфлюенсеры и правильный timing.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="29 мая 2026 · 7 мин" data-en="May 29, 2026 · 7 min">29 мая 2026 · 7 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="analysis">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Разбор" data-en="Analysis">Разбор</div>
+        <div class="sp-news-row-title" data-ru="TikTok vs Instagram: где казахстанским брендам выгоднее размещать рекламу" data-en="TikTok vs Instagram: where it's more profitable for Kazakh brands to advertise">TikTok vs Instagram: где казахстанским брендам выгоднее размещать рекламу</div>
+        <div class="sp-news-row-excerpt" data-ru="Сравниваем стоимость контакта, вовлечённость и конверсию на двух платформах." data-en="Comparing CPM, engagement and conversion rates on both platforms.">Сравниваем стоимость контакта, вовлечённость и конверсию на двух платформах.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="28 мая 2026 · 6 мин" data-en="May 28, 2026 · 6 min">28 мая 2026 · 6 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="analysis">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Разбор" data-en="Analysis">Разбор</div>
+        <div class="sp-news-row-title" data-ru="Сколько реально зарабатывают казахстанские блогеры в 2026 году" data-en="How much Kazakh bloggers really earn in 2026">Сколько реально зарабатывают казахстанские блогеры в 2026 году</div>
+        <div class="sp-news-row-excerpt" data-ru="Опросили 40 блогеров разного масштаба и собрали данные о реальных гонорарах." data-en="We surveyed 40 bloggers of various sizes and collected data on real fees.">Опросили 40 блогеров разного масштаба и собрали данные о реальных гонорарах.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="24 мая 2026 · 5 мин" data-en="May 24, 2026 · 5 min">24 мая 2026 · 5 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="column">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Колонка" data-en="Column">Колонка</div>
+        <div class="sp-news-row-title" data-ru="Почему казахстанским блогерам не нужны 1 миллион подписчиков, чтобы зарабатывать" data-en="Why Kazakh bloggers don't need 1M followers to earn money">Почему казахстанским блогерам не нужны 1 миллион подписчиков, чтобы зарабатывать</div>
+        <div class="sp-news-row-excerpt" data-ru="Микроинфлюенсеры с 10–50к аудиторией нередко зарабатывают больше миллионников." data-en="Micro-influencers with 10–50K audiences often earn more than million-follower accounts.">Микроинфлюенсеры с 10–50к аудиторией нередко зарабатывают больше миллионников.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="21 мая 2026 · 6 мин" data-en="May 21, 2026 · 6 min">21 мая 2026 · 6 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="interview">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Интервью" data-en="Interview">Интервью</div>
+        <div class="sp-news-row-title" data-ru="Создатель самого быстрорастущего EdTech-стартапа Казахстана: «Мы отказали KASE»" data-en="Founder of Kazakhstan's fastest-growing EdTech startup: 'We said no to KASE'">Создатель самого быстрорастущего EdTech-стартапа Казахстана: «Мы отказали KASE»</div>
+        <div class="sp-news-row-excerpt" data-ru="Арман Сейткали о том, как построить образовательный сервис с 400k пользователями без венчурных денег." data-en="Arman Seitkali on building an educational service with 400K users without VC money.">Арман Сейткали о том, как построить образовательный сервис с 400k пользователями без венчурных денег.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="15 мая 2026 · 12 мин" data-en="May 15, 2026 · 12 min">15 мая 2026 · 12 мин</div>
+    </a>
+
+    <a href="#" class="sp-news-row" data-cat="case">
+      <div class="sp-news-row-cover"><div class="sp-news-row-cover-ph">◉</div></div>
+      <div class="sp-news-row-body">
+        <div class="sp-news-row-cat" data-ru="Кейс" data-en="Case">Кейс</div>
+        <div class="sp-news-row-title" data-ru="Кейс Geely Kazakhstan: как автобренд вышел на молодую аудиторию через UGC" data-en="Geely Kazakhstan case: how a car brand reached young audiences through UGC">Кейс Geely Kazakhstan: как автобренд вышел на молодую аудиторию через UGC</div>
+        <div class="sp-news-row-excerpt" data-ru="Как правильный creator mix и нативный формат сработали лучше, чем прямая реклама." data-en="How the right creator mix and native format outperformed direct advertising.">Как правильный creator mix и нативный формат сработали лучше, чем прямая реклама.</div>
+      </div>
+      <div class="sp-news-row-meta" data-ru="25 мая 2026 · 7 мин" data-en="May 25, 2026 · 7 min">25 мая 2026 · 7 мин</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sp-footer">
+  <div class="sp-footer-bottom">
+    <span data-ru="© 2026 sherim people · Алматы, Казахстан" data-en="© 2026 sherim people · Almaty, Kazakhstan">© 2026 sherim people · Алматы, Казахстан</span>
+    <a href="../index.html" data-ru="← Вернуться на sherim media" data-en="← Back to sherim media">← Вернуться на sherim media</a>
+  </div>
+</footer>
+
+<script>
+function applyLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-ru],[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) {
+      if (val.includes('<')) el.innerHTML = val;
+      else el.textContent = val;
+    }
+  });
+  document.querySelectorAll('.sp-lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('sherim-lang', lang); } catch(e) {}
+}
+document.querySelectorAll('.sp-lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+});
+const savedLang = (() => { try { return localStorage.getItem('sherim-lang'); } catch(e) { return null; } })();
+if (savedLang === 'en') applyLang('en');
+
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '◑' : '◐';
+  try { localStorage.setItem('sherim-people-theme', theme); } catch(e) {}
+}
+themeToggle.addEventListener('click', () => {
+  setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+const savedTheme = (() => { try { return localStorage.getItem('sherim-people-theme'); } catch(e) { return null; } })();
+if (savedTheme) setTheme(savedTheme);
+
+/* Filter */
+document.querySelectorAll('.sp-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sp-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.sp-news-row').forEach(row => {
+      if (cat === 'all' || row.dataset.cat === cat) {
+        row.style.display = 'grid';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

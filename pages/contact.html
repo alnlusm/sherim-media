@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Контакты · sherim media</title>
+<meta name="description" content="Contacts sherim media - Афциано, 35Б (Алматы). Phone, WhatsApp, email, Instagram." />
+<link rel="stylesheet" href="../assets/style.css" />
+<link rel="stylesheet" href="../assets/service.css" />
+<style>
+  .contact-main {
+    padding: 40px 40px 120px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-big {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 40px;
+  }
+  .contact-big em { font-style: italic; color: #CECECE; }
+  .contact-big .highlight { background: var(--accent); padding: 0 12px; color: var(--bg); font-style: normal; }
+
+  .contact-lede {
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 540px;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .contact-lede strong { color: var(--accent-2); font-weight: 500; }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 20px;
+  }
+  .channel {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 30px;
+    padding: 30px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .channel:last-child { border-bottom: none; }
+  .channel:hover { background: var(--bg-alt); }
+
+  .channel-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .channel-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.01em;
+  }
+  .channel-arrow {
+    font-size: 20px;
+    color: #CECECE;
+    transition: transform 0.3s;
+  }
+  .channel:hover .channel-arrow { transform: translate(4px, -4px); }
+
+  @media (max-width: 900px) {
+    .contact-main { padding: 40px 20px 80px; grid-template-columns: 1fr; gap: 50px; }
+    .channel { grid-template-columns: 100px 1fr auto; gap: 20px; padding: 24px; }
+    .channel-value { font-size: 18px; }
+  }
+  @media (max-width: 500px) {
+    .channel { grid-template-columns: 1fr auto; gap: 14px; }
+    .channel-label { grid-column: span 2; margin-bottom: -10px; }
+  }
+
+  /* Info block (address, hours) */
+  .contact-side {
+    position: sticky;
+    top: 100px;
+  }
+  .side-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    padding: 40px 36px;
+    margin-bottom: 20px;
+  }
+  .side-card h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #CECECE;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .side-card p { font-size: 16px; line-height: 1.55; color: var(--ink); }
+  .side-card p + p { margin-top: 14px; color: var(--ink-dim); font-size: 14px; }
+
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 20px;
+    font-size: 14px;
+  }
+  .hours-grid span:nth-child(odd) { color: var(--ink-dim); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Real map (OpenStreetMap iframe) */
+  .map-block {
+    padding: 120px 40px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+  }
+  .map-real {
+    aspect-ratio: 16 / 7;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    /* Контейнер для iframe + метки */
+  }
+  .map-real iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    /* Чтобы карта вписывалась в тёмную тему — лёгкий фильтр (опционально) */
+    filter: grayscale(40%) contrast(0.95);
+    transition: filter 0.4s;
+  }
+  .map-real:hover iframe { filter: grayscale(0%) contrast(1); }
+
+  .map-label {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    font-family: 'Comfortaa', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 2;
+    background: rgba(30, 26, 25, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 18px 22px;
+    border: 1px solid var(--line);
+    pointer-events: auto;
+  }
+  .map-label strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    text-transform: none;
+    margin-top: 6px;
+    font-variation-settings: "opsz" 144;
+  }
+  .map-label .map-open {
+    display: inline-flex;
+    margin-top: 12px;
+    font-size: 11px;
+    color: #CECECE;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: opacity 0.3s;
+  }
+  .map-label .map-open:hover { opacity: 0.7; }
+
+  @media (max-width: 800px) {
+    .map-block { padding: 60px 20px; }
+    .map-real { aspect-ratio: 4 / 5; }
+    .map-label { left: 16px; bottom: 16px; padding: 14px 16px; }
+    .map-label strong { font-size: 16px; }
+  }
+</style>
+
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="preloader-mark"/></div>
+    <div class="preloader-bar"></div>
+    <div class="preloader-pct">LOADING — CONTACT</div>
+  </div>
+</div>
+
+<div class="cursor-dot"></div>
+
+<nav class="main-nav">
+  <a href="../index.html" class="logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="logo-mark"/><span class="logo-text">sherim media</span><span class="meta">EST · 2020</span></a>
+  <div class="nav-center">
+    <a href="about.html">О нас</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="influence.html">Influence</a>
+    <a href="production.html">Production</a>
+    <a href="ugc.html">UGC</a>
+    <a href="contact.html" class="active">Контакты</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <select class="lang-select" aria-label="Language">
+        <option value="kk">KAZ</option>
+        <option value="ru" selected>RUS</option>
+        <option value="en">ENG</option>
+        <option value="ko">KOR</option>
+        <option value="zh">CHN</option>
+      </select>
+    </div>
+    <a href="brief.html" class="btn-nav">Заполнить бриф →</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="about.html">О нас</a>
+  <a href="cases.html">Кейсы</a>
+  <a href="influence.html">Influence Marketing</a>
+  <a href="production.html">Production</a>
+  <a href="ugc.html">UGC Content</a>
+  <a href="creative.html">Creative</a>
+  <a href="pr.html">PR</a>
+  <a href="contact.html">Контакты</a>
+  <a href="brief.html" style="color: #CECECE;">Заполнить бриф →</a>
+  <div class="mobile-lang">
+    <select class="lang-select" aria-label="Language">
+      <option value="kk">KAZ</option>
+      <option value="ru" selected>RUS</option>
+      <option value="en">ENG</option>
+      <option value="ko">KOR</option>
+      <option value="zh">CHN</option>
+    </select>
+  </div>
+  <div class="mobile-nav-foot">
+    <div>+7 705 951 5511</div>
+    <div>sherim.media@gmail.com</div>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumbs reveal">
+      <a href="../index.html">Главная</a>
+      <span class="sep">/</span>
+      <span style="color: #CECECE;">Контакты</span>
+    </div>
+    <h1 class="page-title reveal"
+      data-ru='<span class="italic">Давайте</span> <span class="block-font">сделаем</span><br><span class="outline">хоть что-то вместе.</span>'
+      data-en='<span class="italic">Let&apos;s</span> <span class="block-font">make</span><br><span class="outline">something together.</span>'>
+      <span class="italic">Давайте</span> <span class="block-font">сделаем</span><br>
+      <span class="outline">хоть что-то вместе.</span>
+    </h1>
+    <p class="page-sub reveal">Самый быстрый способ — бриф. Если хочется обсудить голосом или просто задать вопрос — все каналы ниже. Отвечаем в течение дня.</p>
+  </div>
+</section>
+
+<section class="contact-main">
+  <div>
+    <h2 class="contact-big reveal"
+      data-ru="Пишите, звоните,<br>пейте с нами <em>кофе</em> в <span class=&quot;highlight&quot;>Алматы</span>."
+      data-en="Write, call,<br>have <em>coffee</em> with us in <span class=&quot;highlight&quot;>Almaty</span>.">
+      Пишите, звоните,<br>
+      пейте с нами <em>кофе</em> в <span class="highlight">Алматы</span>.
+    </h2>
+    <p class="contact-lede reveal"
+      data-ru="Самый быстрый способ начать — <strong>заполнить бриф</strong>. Так мы сразу поймём задачу и сможем подготовить осмысленное предложение. Если хочется голосом — WhatsApp и звонок ниже."
+      data-en="The fastest way to start is <strong>filling out a brief</strong>. This way we immediately understand the task and can prepare a meaningful proposal. Prefer voice — WhatsApp and call are below.">
+      Самый быстрый способ начать — <strong>заполнить бриф</strong>. Так мы сразу поймём задачу и сможем подготовить осмысленное предложение. Если хочется голосом — WhatsApp и звонок ниже.
+    </p>
+    <a href="brief.html" class="btn-big btn-primary reveal">Заполнить бриф →</a>
+
+    <div class="contact-channels reveal-stagger" style="margin-top: 50px;">
+      <a href="https://wa.me/77719515511" class="channel">
+        <div class="channel-label">WhatsApp</div>
+        <div class="channel-value">+7 705 951 5511</div>
+        <div class="channel-arrow">↗</div>
+      </a>
+      <a href="tel:+77719515511" class="channel">
+        <div class="channel-label">Звонок</div>
+        <div class="channel-value">+7 705 951 5511</div>
+        <div class="channel-arrow">↗</div>
+      </a>
+      <a href="mailto:sherim.media@gmail.com" class="channel">
+        <div class="channel-label">Email</div>
+        <div class="channel-value">sherim.media@gmail.com</div>
+        <div class="channel-arrow">↗</div>
+      </a>
+      <a href="https://www.instagram.com/sherim.media/" target="_blank" rel="noopener" class="channel">
+        <div class="channel-label">Instagram</div>
+        <div class="channel-value">@sherim.media</div>
+        <div class="channel-arrow">↗</div>
+      </a>
+      <a href="https://t.me/+77719515511" class="channel">
+        <div class="channel-label">Telegram</div>
+        <div class="channel-value">+7 705 951 5511</div>
+        <div class="channel-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+
+  <aside class="contact-side">
+    <div class="side-card reveal">
+      <h4>/ Офис</h4>
+      <p>Афциано, 35Б (Алматы)</p>
+      <p>Казахстан · Almaty City</p>
+    </div>
+    <div class="side-card reveal">
+      <h4>/ Часы работы</h4>
+      <div class="hours-grid">
+        <span>Пн—Пт</span><span>10:00 — 19:00</span>
+        <span>Сб</span><span>По договорённости</span>
+        <span>Вс</span><span>Выходной</span>
+      </div>
+    </div>
+    <div class="side-card reveal">
+      <h4>/ Реквизиты</h4>
+      <p>ТОО «SHERIM MEDIA»</p>
+      <p>БИН по запросу</p>
+    </div>
+  </aside>
+</section>
+
+<section class="map-block">
+  <div class="section-head reveal">
+    <div class="section-num">[ НА КАРТЕ ]</div>
+    <h2 class="section-title" data-ru='Найдёте <span class="italic">нас</span>' data-en='Find <span class="italic">us</span>'>Найдёте <span class="italic">нас</span></h2>
+  </div>
+  <div class="map-real reveal">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=76.8026%2C43.1876%2C76.8626%2C43.2276&amp;layer=mapnik&amp;marker=43.207587%2C76.832585"
+      style="border: 0; width: 100%; height: 100%;"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="sherim media - Афцинао, 35Б (Алматы)"
+      allowfullscreen></iframe>
+    <div class="map-label">
+      Адрес
+      <strong>Афциано, 35Б · Алматы</strong>
+      <a href="https://2gis.kz/almaty/geo/9430047375178914" target="_blank" rel="noopener" class="map-open">Открыть в&nbsp;2ГИС →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MINI CTA -->
+<section class="mini-cta">
+  <div class="mini-cta-inner">
+    <div class="mono reveal" style="margin-bottom: 20px;">[ Не откладывайте ]</div>
+    <h2 class="mini-cta-title reveal" data-ru='Начнём <span class="italic">сегодня</span>?' data-en='Shall we start <span class="italic">today</span>?'>Начнём <span class="italic">сегодня</span>?</h2>
+    <p class="mini-cta-sub reveal">Бриф занимает 5-7 минут. Со своей стороны вернёмся с предложением в течение дня.</p>
+    <div class="mini-cta-buttons reveal">
+      <a href="brief.html" class="btn-big btn-primary">Заполнить бриф →</a>
+      <a href="https://wa.me/77719515511" class="btn-big btn-secondary">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="main-footer">
+  <div class="footer-big"><img class="footer-logo-img" src="../assets/logo-ring-grey.png" alt="sherim media rings logo" /></div>
+  <div class="footer-grid">
+    
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <a href="about.html">О нас</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="brief.html">Бриф</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+    <div class="footer-col">
+      <h5>Услуги</h5>
+      <a href="influence.html">Influence</a>
+      <a href="production.html">Production</a>
+      <a href="ugc.html">UGC</a>
+      <a href="creative.html">Creative</a>
+      <a href="pr.html">PR</a>
+    </div>
+    <div class="footer-col">
+      <h5>Связь</h5>
+      <a href="mailto:sherim.media@gmail.com">sherim.media@gmail.com</a>
+      <a href="https://wa.me/77719515511">+7 705 951 5511</a>
+      <a href="https://www.instagram.com/sherim.media/" target="_blank">Instagram ↗</a>
+      <p style="color: var(--ink-dim); margin-top: 10px;">Афциано, 35Б (Алматы)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2020—2026 ТОО «sherim media»</div>
+    <div>Sharing stories · Almaty / KZ</div>
+    <div><a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Наверх ↑</a></div>
+  </div>
+</footer>
+
+<script src="../assets/script.js"></script>
+<script src="../assets/lang.js"></script>
+</body>
+</html>

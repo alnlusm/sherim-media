@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Кейсы · sherim media</title>
+<meta name="description" content="Cases by sherim media: realized projects for beauty, food, auto, tech and retail brands." />
+<link rel="stylesheet" href="../assets/style.css" />
+<link rel="stylesheet" href="../assets/service.css" />
+<style>
+  .cases-filter {
+    padding: 40px 40px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 30px;
+  }
+  .filter-btn {
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--ink);
+    background: transparent;
+  }
+  .filter-btn:hover { border-color: #CECECE; color: #CECECE; }
+  .filter-btn.active { background: var(--accent); color: var(--ink); border-color: #CECECE; }
+
+  .cases-section { padding: 60px 40px 120px; }
+  .cases-grid-big {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .case-big {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    padding: 40px 30px 48px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .case-big:hover {
+    border-color: #CECECE;
+    transform: translate(-4px, -4px);
+  }
+  .case-big::before {
+    content: "";
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 240px; height: 240px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.6s;
+  }
+  .case-big:hover::before { opacity: 0.12; transform: scale(1.2); }
+  .case-big > * { position: relative; z-index: 1; }
+
+  .case-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+  .case-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #CECECE;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .case-idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .case-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .case-status::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .case-big-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 16px;
+  }
+  .case-big-title em { font-style: italic; color: #CECECE; }
+
+  .case-big-desc {
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+    margin-bottom: auto;
+  }
+  .case-foot {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .case-cat {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .case-arrow {
+    font-size: 22px;
+    color: #CECECE;
+    transition: transform 0.3s;
+  }
+  .case-big:hover .case-arrow { transform: translateX(8px); }
+
+  @media (max-width: 900px) {
+    .cases-filter { padding: 30px 20px; }
+    .cases-section { padding: 40px 20px 80px; }
+    .cases-grid-big { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .cases-grid-big { grid-template-columns: 1fr; }
+  }
+</style>
+
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="preloader-mark"/></div>
+    <div class="preloader-bar"></div>
+    <div class="preloader-pct">LOADING — CASES</div>
+  </div>
+</div>
+
+<div class="cursor-dot"></div>
+
+<nav class="main-nav">
+  <a href="../index.html" class="logo"><img src="../assets/logo-ring-grey.png" alt="◯◯◯" class="logo-mark"/><span class="logo-text">sherim media</span><span class="meta">EST · 2020</span></a>
+  <div class="nav-center">
+    <a href="about.html">О нас</a>
+    <a href="cases.html" class="active">Кейсы</a>
+    <a href="influence.html">Influence</a>
+    <a href="production.html">Production</a>
+    <a href="ugc.html">UGC</a>
+    <a href="contact.html">Контакты</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <select class="lang-select" aria-label="Language">
+        <option value="kk">KAZ</option>
+        <option value="ru" selected>RUS</option>
+        <option value="en">ENG</option>
+        <option value="ko">KOR</option>
+        <option value="zh">CHN</option>
+      </select>
+    </div>
+    <a href="brief.html" class="btn-nav">Заполнить бриф →</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="about.html">О нас</a>
+  <a href="cases.html">Кейсы</a>
+  <a href="influence.html">Influence Marketing</a>
+  <a href="production.html">Production</a>
+  <a href="ugc.html">UGC Content</a>
+  <a href="creative.html">Creative</a>
+  <a href="pr.html">PR</a>
+  <a href="contact.html">Контакты</a>
+  <a href="brief.html" style="color: #CECECE;">Заполнить бриф →</a>
+  <div class="mobile-lang">
+    <select class="lang-select" aria-label="Language">
+      <option value="kk">KAZ</option>
+      <option value="ru" selected>RUS</option>
+      <option value="en">ENG</option>
+      <option value="ko">KOR</option>
+      <option value="zh">CHN</option>
+    </select>
+  </div>
+  <div class="mobile-nav-foot">
+    <div>+7 705 951 5511</div>
+    <div>sherim.media@gmail.com</div>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumbs reveal">
+      <a href="../index.html">Главная</a>
+      <span class="sep">/</span>
+      <span style="color: #CECECE;">Кейсы</span>
+    </div>
+    <h1 class="page-title reveal"
+      data-ru='<span class="italic">Наши</span><br><span class="block-font">работы.</span>'
+      data-en='<span class="italic">Our</span><br><span class="block-font">work.</span>'>
+      <span class="italic">Наши</span><br>
+      <span class="block-font">работы.</span>
+    </h1>
+    <p class="page-sub reveal"
+      data-ru="Подборка реализованных кампаний: Influence-маркетинг, UGC, продакшн и креатив для брендов."
+      data-en="A selection of realized campaigns: Influence marketing, UGC, production and creative work for brands.">Подборка реализованных кампаний: Influence-маркетинг, UGC, продакшн и креатив для брендов.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-row reveal-stagger">
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="1000" data-suffix="+">0</span></div>
+    <div class="stat-label">проектов</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="120" data-suffix="+">0</span></div>
+    <div class="stat-label">брендов-клиентов из разных ниш</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="250" data-suffix="M+">0</span></div>
+    <div class="stat-label">суммарный охват</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span data-counter="6">0</span></div>
+    <div class="stat-label">направлений услуг</div>
+  </div>
+</section>
+
+<div class="cases-filter reveal">
+  <button class="filter-btn active" data-cat="all">Все</button>
+  <button class="filter-btn" data-cat="pr">PR</button>
+  <button class="filter-btn" data-cat="influence">Influence</button>
+  <button class="filter-btn" data-cat="production">Production</button>
+  <button class="filter-btn" data-cat="creative">Creative</button>
+  <button class="filter-btn" data-cat="ugc">UGC</button>
+</div>
+
+<section class="cases-section">
+  <div class="cases-grid-big reveal-stagger">
+            <a href="case.html?case=kulikov" class="case-big" data-cat="influence">
+      <div class="case-head"><div class="case-tag">/ Kulikov</div><div class="case-idx">No. 001</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">Kulikov<br><em>influence launch</em></h3>
+      <p class="case-big-desc">Creator shortlist, integration scripts and reach-focused communication for the Kulikov brand.</p>
+      <div class="case-foot"><div class="case-cat">INFLUENCE</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=dalba" class="case-big" data-cat="ugc">
+      <div class="case-head"><div class="case-tag">/ d'Alba</div><div class="case-idx">No. 002</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">d'Alba<br><em>UGC content</em></h3>
+      <p class="case-big-desc">Native beauty content: product demos, creator videos and short assets for social channels.</p>
+      <div class="case-foot"><div class="case-cat">UGC</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=zolotoe" class="case-big" data-cat="production">
+      <div class="case-head"><div class="case-tag">/ Золотое Яблоко</div><div class="case-idx">No. 003</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">Золотое Яблоко<br><em>visual production</em></h3>
+      <p class="case-big-desc">Beauty retail visuals: art direction, short videos and content adaptations for different channels.</p>
+      <div class="case-foot"><div class="case-cat">PRODUCTION</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=vf" class="case-big" data-cat="influence">
+      <div class="case-head"><div class="case-tag">/ VF Cosmetics</div><div class="case-idx">No. 004</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">VF Cosmetics<br><em>creator mix</em></h3>
+      <p class="case-big-desc">Beauty creator integrations with relevant faces, clear product messages and publication control.</p>
+      <div class="case-foot"><div class="case-cat">INFLUENCE</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=healthy" class="case-big" data-cat="creative">
+      <div class="case-head"><div class="case-tag">/ The Healthy Place</div><div class="case-idx">No. 005</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">The Healthy Place<br><em>brand content</em></h3>
+      <p class="case-big-desc">Creative platform, content formats and visual language for a wellness audience.</p>
+      <div class="case-foot"><div class="case-cat">CREATIVE</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=tecno" class="case-big" data-cat="influence">
+      <div class="case-head"><div class="case-tag">/ TECNO</div><div class="case-idx">No. 006</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">TECNO<br><em>creator launch</em></h3>
+      <p class="case-big-desc">Online launch with creators: product reviews, scenario control and posts for the target audience.</p>
+      <div class="case-foot"><div class="case-cat">INFLUENCE</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=geely" class="case-big" data-cat="production">
+      <div class="case-head"><div class="case-tag">/ Geely</div><div class="case-idx">No. 007</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">Geely<br><em>motion content</em></h3>
+      <p class="case-big-desc">Video and visual materials for automotive communication: motion, details and brand tone.</p>
+      <div class="case-foot"><div class="case-cat">PRODUCTION</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+    <a href="case.html?case=garnier" class="case-big" data-cat="ugc">
+      <div class="case-head"><div class="case-tag">/ Garnier</div><div class="case-idx">No. 008</div></div>
+      <div class="case-status">Realized</div>
+      <h3 class="case-big-title">Garnier<br><em>native reviews</em></h3>
+      <p class="case-big-desc">Native reviews and UGC assets for beauty products with a focus on trust and product benefits.</p>
+      <div class="case-foot"><div class="case-cat">UGC</div><div class="case-arrow">&rarr;</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- MINI CTA -->
+<section class="mini-cta">
+  <div class="mini-cta-inner">
+    <div class="mono reveal" style="margin-bottom: 20px;">[ Станьте нашим кейсом ]</div>
+    <h2 class="mini-cta-title reveal">Ваш <span class="italic">проект</span><br>может быть здесь.</h2>
+    <p class="mini-cta-sub reveal">Расскажите о задаче — запустим, отчитаемся и добавим в портфолио (если захотите).</p>
+    <div class="mini-cta-buttons reveal">
+      <a href="brief.html" class="btn-big btn-primary">Заполнить бриф →</a>
+      <a href="https://wa.me/77719515511" class="btn-big btn-secondary">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="main-footer">
+  <div class="footer-big"><img class="footer-logo-img" src="../assets/logo-ring-grey.png" alt="sherim media rings logo" /></div>
+  <div class="footer-grid">
+    
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <a href="about.html">О нас</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="brief.html">Бриф</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+    <div class="footer-col">
+      <h5>Услуги</h5>
+      <a href="influence.html">Influence</a>
+      <a href="production.html">Production</a>
+      <a href="ugc.html">UGC</a>
+      <a href="creative.html">Creative</a>
+      <a href="pr.html">PR</a>
+    </div>
+    <div class="footer-col">
+      <h5>Связь</h5>
+      <a href="mailto:sherim.media@gmail.com">sherim.media@gmail.com</a>
+      <a href="https://wa.me/77719515511">+7 705 951 5511</a>
+      <a href="https://www.instagram.com/sherim.media/" target="_blank">Instagram ↗</a>
+      <p style="color: var(--ink-dim); margin-top: 10px;">Афциано, 35Б (Алматы)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2020—2026 ТОО «sherim media»</div>
+    <div>Sharing stories · Almaty / KZ</div>
+    <div><a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Наверх ↑</a></div>
+  </div>
+</footer>
+
+<script src="../assets/script.js"></script>
+<script>
+  // Фильтр кейсов
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.case-big').forEach(card => {
+        const cats = (card.dataset.cat || '').split(/\s+/);
+        if (cat === 'all' || cats.includes(cat)) {
+          card.style.display = 'flex';
+          card.style.opacity = '0';
+          requestAnimationFrame(() => {
+            card.style.transition = 'opacity 0.4s';
+            card.style.opacity = '1';
+          });
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+<script src="../assets/lang.js"></script>
+</body>
+</html>
