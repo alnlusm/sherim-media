@@ -556,10 +556,10 @@
       Готово. <em>Спасибо!</em><br>
       Скоро напишем.
     </h2>
-    <p class="success-sub">Мы получили ваш бриф и свяжемся в течение рабочего дня по email или WhatsApp. Если хочется ускориться — напишите нам напрямую.</p>
+    <p class="success-sub">Мы получили ваш бриф и свяжемся в течение рабочего дня по email или WhatsApp. Хотите ускориться — отправьте этот же бриф нам в WhatsApp одной кнопкой.</p>
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="../index.html" class="btn-big btn-primary">На главную →</a>
-      <a href="https://wa.me/77719515511" class="btn-big btn-secondary">Написать в WhatsApp</a>
+      <a href="https://wa.me/77719515511" class="btn-big btn-primary" id="waBriefBtn" target="_blank" rel="noopener">Продублировать в WhatsApp →</a>
+      <a href="../index.html" class="btn-big btn-secondary">На главную</a>
     </div>
   </div>
 
@@ -618,6 +618,50 @@
     return true;
   }
 
+  // ── Сбор и отправка брифа ──
+  const budgetLabels = { '<500k': 'До 500К ₸', '500k-2m': '500К — 2М ₸', '2m-5m': '2М — 5М ₸', '5m-10m': '5М — 10М ₸', '>10m': '10М+ ₸', 'tbd': 'Обсудим' };
+  const serviceLabels = { influence: 'Influence', production: 'Production', ugc: 'UGC', creative: 'Creative', media: 'СМИ', pr: 'PR' };
+
+  function collectBrief() {
+    const f = document.getElementById('briefForm');
+    const v = (n) => { const el = f.elements[n]; return el && typeof el.value === 'string' ? el.value.trim() : ''; };
+    const services = [...f.querySelectorAll('input[name="services"]:checked')].map(i => serviceLabels[i.value] || i.value).join(', ');
+    const budgetEl = f.querySelector('input[name="budget"]:checked');
+    return {
+      'Компания': v('company') || '—',
+      'Сайт / соцсети': v('site') || '—',
+      'Индустрия': v('industry') || '—',
+      'Услуги': services || '—',
+      'Задача': v('task') || '—',
+      'Целевая аудитория': v('audience') || '—',
+      'Сроки': v('deadline') || '—',
+      'Бюджет': budgetEl ? (budgetLabels[budgetEl.value] || budgetEl.value) : '—',
+      'Имя': v('name') || '—',
+      'Email': v('email') || '—',
+      'Телефон / WhatsApp': v('phone') || '—',
+      'Откуда узнали': v('source') || '—'
+    };
+  }
+
+  function briefAsText(d) {
+    return 'НОВЫЙ БРИФ — sherim media\n\n' + Object.entries(d).map(([k, val]) => k + ': ' + val).join('\n');
+  }
+
+  function sendBriefEmail(d) {
+    // FormSubmit: письмо приходит на sherim.media@gmail.com.
+    // При самой первой заявке FormSubmit пришлёт на эту почту письмо
+    // с кнопкой активации — нужно нажать её один раз.
+    return fetch('https://formsubmit.co/ajax/sherim.media@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.assign({
+        _subject: 'Новый бриф: ' + d['Компания'],
+        _template: 'table',
+        _captcha: 'false'
+      }, d))
+    });
+  }
+
   btnNext.addEventListener('click', () => {
     if (!validateStep(current)) return;
     if (current < total) {
@@ -625,10 +669,13 @@
       showStep(current);
     } else {
       // Submit
+      const data = collectBrief();
+      sendBriefEmail(data).catch(() => {});
+      const waBtn = document.getElementById('waBriefBtn');
+      if (waBtn) waBtn.href = 'https://wa.me/77719515511?text=' + encodeURIComponent(briefAsText(data));
       document.getElementById('briefForm').style.display = 'none';
       document.querySelector('.brief-head').style.display = 'none';
       document.getElementById('successScreen').classList.add('visible');
-      // Here you'd normally POST to backend
     }
   });
 
