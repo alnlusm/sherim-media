@@ -558,7 +558,7 @@
     </h2>
     <p class="success-sub">Мы получили ваш бриф и свяжемся в течение рабочего дня по email или WhatsApp. Хотите ускориться — отправьте этот же бриф нам в WhatsApp одной кнопкой.</p>
     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="https://wa.me/77719515511" class="btn-big btn-primary" id="waBriefBtn" target="_blank" rel="noopener">Продублировать в WhatsApp →</a>
+      <a href="https://wa.me/77059515511" class="btn-big btn-primary" id="waBriefBtn" target="_blank" rel="noopener">Продублировать в WhatsApp →</a>
       <a href="../index.html" class="btn-big btn-secondary">На главную</a>
     </div>
   </div>
@@ -672,7 +672,7 @@
       const data = collectBrief();
       sendBriefEmail(data).catch(() => {});
       const waBtn = document.getElementById('waBriefBtn');
-      if (waBtn) waBtn.href = 'https://wa.me/77719515511?text=' + encodeURIComponent(briefAsText(data));
+      if (waBtn) waBtn.href = 'https://wa.me/77059515511?text=' + encodeURIComponent(briefAsText(data));
       document.getElementById('briefForm').style.display = 'none';
       document.querySelector('.brief-head').style.display = 'none';
       document.getElementById('successScreen').classList.add('visible');
